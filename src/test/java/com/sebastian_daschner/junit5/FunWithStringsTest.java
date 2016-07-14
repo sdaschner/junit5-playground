@@ -1,5 +1,6 @@
 package com.sebastian_daschner.junit5;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestFactory;
@@ -15,7 +16,12 @@ import static org.junit.jupiter.api.DynamicTest.stream;
 
 public class FunWithStringsTest {
 
-    private FunWithStrings cut = new FunWithStrings();
+    private FunWithStrings cut;
+
+    @BeforeEach
+    public void setUp() {
+        cut = new FunWithStrings();
+    }
 
     @Test
     public void testGetStringLengthSimpleTest() {
@@ -23,7 +29,7 @@ public class FunWithStringsTest {
     }
 
     @TestFactory
-    public Collection<DynamicTest> testGetStringLengthIndividualLambdas() {
+    public Collection<DynamicTest> createGetStringLengthTestsIndividualLambdas() {
         return asList(
                 dynamicTest("test: hello", () -> assertEquals(cut.getStringLength("hello"), "hello:5")),
                 dynamicTest("test: hel", () -> assertEquals(cut.getStringLength("hel"), "hel:3")),
@@ -34,7 +40,7 @@ public class FunWithStringsTest {
     }
 
     @TestFactory
-    public Stream<DynamicTest> testGetStringLengthStreamDynamicTest() {
+    public Stream<DynamicTest> createGetStringLengthTestsStreamDynamicTest() {
         final String[][] data = {
                 // input, expected
                 {"hello", "hello:5"},
@@ -48,7 +54,7 @@ public class FunWithStringsTest {
     }
 
     @TestFactory
-    public Stream<DynamicTest> testGetStringLengthStream() {
+    public Stream<DynamicTest> createGetStringLengthTestsStream() {
         final String[][] data = {
                 // input, expected
                 {"hello", "hello:5"},
