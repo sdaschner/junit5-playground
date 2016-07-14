@@ -8,7 +8,9 @@ import org.junit.jupiter.api.TestFactory;
 import java.util.Collection;
 import java.util.stream.Stream;
 
+import static com.sebastian_daschner.junit5.TestUtils.assertThat;
 import static java.util.Arrays.asList;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.expectThrows;
 import static org.junit.jupiter.api.DynamicTest.dynamicTest;
@@ -26,6 +28,11 @@ public class FunWithStringsTest {
     @Test
     public void testGetStringLengthSimpleTest() {
         assertEquals("hello:5", cut.getStringLength("hello"), () -> "'hello' (length: 5) wasn't calculated properly");
+    }
+
+    @Test
+    public void testGetStringLengthHamcrest() {
+        assertThat(cut.getStringLength("hello"), is("hello:5"), () -> "'hello' (length: 5) wasn't calculated properly");
     }
 
     @TestFactory
