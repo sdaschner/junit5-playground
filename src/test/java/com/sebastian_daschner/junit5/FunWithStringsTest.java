@@ -17,6 +17,11 @@ public class FunWithStringsTest {
 
     private FunWithStrings cut = new FunWithStrings();
 
+    @Test
+    public void testGetStringLengthSimpleTest() {
+        assertEquals("hello:5", cut.getStringLength("hello"), () -> "'hello' (length: 5) wasn't calculated properly");
+    }
+
     @TestFactory
     public Collection<DynamicTest> testGetStringLengthIndividualLambdas() {
         return asList(
